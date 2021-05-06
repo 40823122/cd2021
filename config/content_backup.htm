@@ -59,7 +59,8 @@
 <p><a href="https://40823129.github.io/cd2021/">網站</a></p>
 <p>40823149趙偉辰</p>
 <p><a href="https://github.com/40823149/cd2021">倉儲</a></p>
-<p><a href="https://40823149.github.io/cd2021/">網站</a></p><h2>stage2分組網站建立</h2>
+<p><a href="https://40823149.github.io/cd2021/">網站</a></p>
+<h2>stage2分組網站建立</h2>
 <p><span size="10" style="font-size: 300%;">分組網站<a href="https://40823122.github.io/stage2/">https://40823122.github.io/stage2/</a></span></p>
 <p><br/><br/><br/></p>
 <p></p>
@@ -108,3 +109,33 @@ heroku git:remote -a 名稱</pre>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">git push heroku
 </pre>
 <p><img alt="" height="480" src="/images/push.png" width="960"/></p>
+<h1>w10</h1>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import sys
+# child threaded script: 
+#simExtRemoteApiStart(19999)
+ 
+vrep.simxFinish(-1)
+ 
+clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
+ 
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+ 
+errorCode,left_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_leftMotor',vrep.simx_opmode_oneshot_wait)
+ 
+errorCode,right_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_rightMotor',vrep.simx_opmode_oneshot_wait)
+ 
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+ 
+errorCode=vrep.simxSetJointTargetVelocity(clientID,left_motor_handle,10, vrep.simx_opmode_oneshot_wait)
+errorCode=vrep.simxSetJointTargetVelocity(clientID,right_motor_handle,30, vrep.simx_opmode_oneshot_wait)
+</pre>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/HQPkgV1a9CI" title="YouTube video player" width="560"></iframe><img alt="" height="822" src="/images/InkedSciTE_sOJJNqudnZ_LI.jpg" width="897"/></p><h1>w11</h1>
+<h1>w12</h1>
+<h1>w13</h1>

@@ -133,25 +133,37 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">模擬遇到的問題 << <a href='模擬遇到的問題.html'>Previous</a> <a href='w10.html'>Next</a> >> w10<br /><h1>w8</h1>
-<p><a href="https://cd2021.herokuapp.com/content/index.html">heroku(個人網站)同步網站</a></p>
-<p><a href="https://stage2-ag7.herokuapp.com/content/index.html">heroku(stage2)同步網站</a></p>
-<p><span>1.從 <a href="http://a.kmol.info:88/heroku.7z">http://a.kmol.info:88/heroku.7z</a> 下載 Heroku CLI，</span><span>解開壓縮至隨身碟Y槽。</span></p>
-<p>2.後修改start.bat檔案如下:</p>
-<p><img alt="" height="531" src="https://40823131.github.io/stage2-ag11/images/SciTE_KSLXN2hCZT.png" width="1000"/></p>
-<p>3.</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">heroku login -i
-heroku git:remote -a 名稱</pre>
-<div>
-<div class="syntaxhighlighter html" id="highlighter_59493"></div>
-</div>
-<div>
-<div class="syntaxhighlighter html"><img alt="" height="480" src="./../images/login.png" width="960"/></div>
-</div>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">git push heroku
+    <div id="tipue_search_content">w8 << <a href='w8.html'>Previous</a> <a href='w11.html'>Next</a> >> w11<br /><h1>w10</h1>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import sys
+# child threaded script: 
+#simExtRemoteApiStart(19999)
+ 
+vrep.simxFinish(-1)
+ 
+clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
+ 
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+ 
+errorCode,left_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_leftMotor',vrep.simx_opmode_oneshot_wait)
+ 
+errorCode,right_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_rightMotor',vrep.simx_opmode_oneshot_wait)
+ 
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+ 
+errorCode=vrep.simxSetJointTargetVelocity(clientID,left_motor_handle,10, vrep.simx_opmode_oneshot_wait)
+errorCode=vrep.simxSetJointTargetVelocity(clientID,right_motor_handle,30, vrep.simx_opmode_oneshot_wait)
 </pre>
-<p><img alt="" height="480" src="./../images/push.png" width="960"/></p>
-<br />模擬遇到的問題 << <a href='模擬遇到的問題.html'>Previous</a> <a href='w10.html'>Next</a> >> w10</div>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/HQPkgV1a9CI" title="YouTube video player" width="560"></iframe></p>
+<p></p>
+<p>下列兩行為左右輪的轉數</p>
+<p><img alt="" height="822" src="./../images/InkedSciTE_sOJJNqudnZ_LI.jpg" width="897"/></p><br />w8 << <a href='w8.html'>Previous</a> <a href='w11.html'>Next</a> >> w11</div>
         
     <!-- footer -->
       <div class="container">
