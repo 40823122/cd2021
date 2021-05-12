@@ -133,10 +133,38 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w4 << <a href='w4.html'>Previous</a> <a href='w6.html'>Next</a> >> w6<br /><h1>w5</h1>
-<p><span size="10" style="font-size: 300%;">w5分組報告影片</span></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/gZY3d9RqIvU" title="YouTube video player" width="560"></iframe></p>
-<br />w4 << <a href='w4.html'>Previous</a> <a href='w6.html'>Next</a> >> w6</div>
+    <div id="tipue_search_content">task1 << <a href='task1.html'>Previous</a> <a href='task3.html'>Next</a> >> task3<br /><h1>task2</h1>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import sys
+# child threaded script: 
+#simExtRemoteApiStart(19999)
+ 
+vrep.simxFinish(-1)
+ 
+clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
+ 
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+ 
+errorCode,left_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_leftMotor',vrep.simx_opmode_oneshot_wait)
+ 
+errorCode,right_motor_handle=vrep.simxGetObjectHandle(clientID,'bubbleRob_rightMotor',vrep.simx_opmode_oneshot_wait)
+ 
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+ 
+errorCode=vrep.simxSetJointTargetVelocity(clientID,left_motor_handle,10, vrep.simx_opmode_oneshot_wait)
+errorCode=vrep.simxSetJointTargetVelocity(clientID,right_motor_handle,30, vrep.simx_opmode_oneshot_wait)
+</pre>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/HQPkgV1a9CI" title="YouTube video player" width="560"></iframe></p>
+<p></p>
+<p>下列兩行為左右輪的轉數</p>
+<p><img alt="" height="822" src="./../images/InkedSciTE_sOJJNqudnZ_LI.jpg" width="897"/></p>
+<br />task1 << <a href='task1.html'>Previous</a> <a href='task3.html'>Next</a> >> task3</div>
         
     <!-- footer -->
       <div class="container">
