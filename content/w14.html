@@ -133,35 +133,14 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">bubble << <a href='bubble.html'>Previous</a> <a href='STAGE2   API.html'>Next</a> >> STAGE2   API<br /><h1>STAGE1   API</h1>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
-import sys
-# child threaded script: 
-#simExtRemoteApiStart(19999)
- 
-vrep.simxFinish(-1)
- 
-clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
- 
-if clientID!= -1:
-    print("Connected to remote server")
-else:
-    print('Connection not successful')
-    sys.exit('Could not connect')
-errorCode,main_handle=vrep.simxGetObjectHandle(clientID,'main',vrep.simx_opmode_oneshot_wait)
-
- 
-if errorCode == -1:
-    print('Can not find main')
-    sys.exit()
- 
-errorCode=vrep.simxSetJointTargetVelocity(clientID,main_handle,10, vrep.simx_opmode_oneshot_wait)
-
-
-</pre>
-<p>模擬情況</p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/dA50gMTFiEE" title="YouTube video player" width="560"></iframe></p>
-<br />bubble << <a href='bubble.html'>Previous</a> <a href='STAGE2   API.html'>Next</a> >> STAGE2   API</div>
+    <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15<br /><h1>w14</h1>
+<p><span><strong>robodk模擬</strong></span></p>
+<p><span></span>嘗試用romote API啟用並模擬pick and place</p>
+<p>1.至黑窗在自己的倉儲下先<span>pip install robodk</span></p>
+<p>2.將白窗中，參數改成自己的檔案位置與ip位置(檔案位置是Robodk應用程式的檔案位置，IP是從軟體內的選項&gt;其他&gt;API服務器IP，做查詢確認，也一併將允許外部API打勾)</p>
+<p>3.在白窗中按go後，將output顯示的py檔位置複製到<span>軟體內的選項&gt;python&gt;python編輯器中，python解釋器使用python.exe即可)</span></p>
+<p><span>4.在軟體內左方工具列選取模擬件(pick and place)並按右鍵&gt;編輯python程序，沒跳出錯誤訊息及代表可以使用白窗來啟用模擬</span></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/7HxR78vm5ac" title="YouTube video player" width="560"></iframe></p><br />w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
         
     <!-- footer -->
       <div class="container">
