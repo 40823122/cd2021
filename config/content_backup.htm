@@ -296,8 +296,118 @@ errorCode=vrep.simxSetJointTargetVelocity(clientID,main01_handle,10, vrep.simx_o
 <p><span>4.在軟體內左方工具列選取模擬件(pick and place)並按右鍵&gt;編輯python程序，沒跳出錯誤訊息及代表可以使用白窗來啟用模擬</span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/7HxR78vm5ac" title="YouTube video player" width="560"></iframe></p><h1>w15</h1>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IKOGwoJ2HLk" title="YouTube video player" width="560"></iframe></p>
-<p>台詞</p>
-<p>We saw this simple two-link robot in the previous lecture about forward kinematics. The tooltip pose of this robot is described simply by two numbers, the coordinates x and y with respect to the world coordinate frame. So，the problem here is that given x and y， we want to determine the joined angles, Q1 and Q2. The solution that we’re going to follow in this particular section is a geometric one. We’re going to start with a simple piece of construction。 We’re going to overlay the red triangle on the top of our robot. We know that the end point coordinate is x, y, so the vertical height or the triangle is y, the horizontal width is x. And, using Pythagoras theorem, we can write r squared equals x squared plus y squared. So far, so easy, Now, we’re going to look at this triangle highlighted here in red and we want to determine the angle alpha. In order to do that, we need to use the cosine rule. And, if you’re a little rusty on the cosine rule, here is a bit of a refresher. We have an arbitrary triangle. We don’t have to have any right angles in it and we’re going to label the length of this edge as A and the angle opposite that edge, we’re going to label as little a. And, we do the same for this edge and this angle, and this edge and this angle. So, all together, the sides are labelled capitals A, B and C, and the angles are labelled little a, little b, and little c。 So, the cosine rule is simply this relationship here. It’s a bit like Pythagoras’ theorem except for this extra term on the end with the cos(a) in it. Now, let’s apply the cosine rule to the particular triangle we looked at a moment ago. It’s pretty straightforward to write down this particular relationship. We can isolate the term cos alpha which gives us the angle alpha that we’re interested in. And, it’s defined in terms of the constant like lengths, A1 and A2 and the position of the end effector, x and y, We can write the simple relationship between the angles alpha and Q2. And, we known from the shape of the cosine function that cos of Q2 must be equal to negative of cos alpha. This time, let’s just write an expression for the cosine of the joined angle Q2. Now, we’re going to draw yet another red triangle and we’re going apply some simple trigonometry here. If we know Q2, then we know this length and this length of the red triangle. We can write this relationship for the sine of the joined angle Q2. Now, we can consider this bigger triangle whose angle is beta and this side length of the triangle is given here in blue. And, the length of the other side of the triangle is this. So, now we can write an expression for the angle beta in terms of these parameters here. Going back to the red triangle that we drew earlier, we can establish a relationship between Q1 and the angle beta. Introduce yet another angle, this one gamma and we can write a relationship between the angle gamma and the tooltip coordinates x and y. Now, we can write a simple relationship between the angles that we’re constructed, gamma and beta and the joined angle we’re interested in which is Q1. And, total relationship looks something like this. Quite a complex relationship, it gives us the angle of joined one, that’s Q1 in terms of the end effector coordinates y and x, and a bunch of constants, a1 and a2, and it’s also a function of the second joint angle, Q2. So, let’s summarize what it is that we have derived here. We have an expression for the cosine of Q2 and we have an expression for Q1. Now, the cosine function is symmetrical about 0. So, if we know the value of the cosine of Q2, then there are two possible solutions, a positive angle and a negative angle. We’re going to explicitly choose the positive angle, which means that I can write this expression here. And now, we have what we call the inverse kinematic solution for this two-link robot. We have an expression for the two joined angles, Q1 and Q2 in terms of the end effector pose x and y, and a bunch of constants. You notice that the two equations are not independent. The equation for Q1, in fact, depends on the solution for Q2. In the case, Q2 is negative and we’re going to write the solution for Q2 with a negative sign in front of the inverse cosine. Now, we need to solve for Q1, so we’re going to introduce this particular red triangle, that angle beta that we solved previously, and the angle gamma which is defined in terms of y and x. Now we write a slightly different relationship between Q1, gamma and beta, different to what we had before. There’s a change of sign involved. Then, we can substitute all that previous equation and com up with this expression for Q1. Again, there is a change of sign here. Previously, this was a negative sign. And, here in summary form is the solution for the inverse kinematics of our two-like robot when it is in this particular configuration, where Q2 is negative. Let’s compare the two solutions, the case where Q2 is positive and the case where Q2 is negative.</p>
-<p>翻譯</p>
-<p>我們在上一堂關於正向運動學看到簡單的二連桿機構。 該機構提供工具提示由兩個簡單數字描述，相對於x與y遵守世界坐標系。 所以，這裡的問圖是給予x和y，我們想要確定連接角Q1與Q2。 我們遵從特定幾何一來解決這個問題。 我們將從一個簡單的結構開始。 我們將在我們的機構覆蓋紅色三角形。 我們知道最終的座標是x,y，所以三角形垂直的高度是y，水平的寬度是x。 且，使用畢氏定理，我們可以寫出r^2=x^2+y^2。 到目前為止很簡單。 現在，我們將查看紅色三角形的高度和我們想要確定的α角度。 為了做到這樣，我們需要使用餘弦定理。 然而，如果你對於餘弦定理有一點生疏，這裡有一點複習。 我們有隨意的三角形。 我們的三角形中不必有任何的直角，我們將標記邊長A，邊長A對邊的角度標記為小a。 然而，我們對邊長和角度做同樣的事情。(剩餘的邊長和角度去標記) 所以，總共是，邊標記大寫A、B、C與角標記的小a、b、c。 所以，餘弦定理在這裡是一種簡單的關係。(A^2=B^2+C^2-2BCcos(a) 這有點像畢氏定理，除了最後這個而外項與cos(a) 在裡面 現在，讓我們將餘弦定理用於我們目前看到的特定三角形。 寫下這種關係非常簡單。 我們可以分離出cosα，它提供我們感興趣的角度α。 然而，它是根據恆定鍵接長度A1和A2以及末端執行x和y。 我們可以寫出α與Q2之間簡單的關係。 而且，我們從餘弦函數的形狀知道Q2的cos必須等於負的cosα。 這一次，讓我們為連接角Q2的餘弦寫一個表達式。 現在，我們要畫另一個紅色三角形，我們將應用一些簡單的三角函數在這裡。 如果我們知道Q2，那我們就知道這個長度和這個宏三角形的長度。 我們可以為連接角Q2的正弦寫出這種關係。 現在，我們可以考慮更大的三角形，它的角是β，邊長是三角形給它藍色。 並且，三角形另一邊的長度是這個。 所以，現在我們可以在此處根據這些參數編寫β角度的表達式。 回到之前畫的紅色三角形，我們可以建立Q1與β角之間的關係。 引入另一個角度，這個γ，我們可以寫出γ角與工具提示座標x和y之間的關係。 現在，我們可以寫出建構角度之間的簡單關係，γ和β以及我們感興趣的連接角Q1。 而且，所有的關係就是這樣。 相當複雜的關係，它給我們連接的角度，就Q1而言末端執行器座標y和x，以及一堆長量a1和a2，它也是第二關節Q2角度的函數。 所以，讓我們總結一下我們在這裡得出的結論。 我們有Q2的餘弦表達式和Q1的表達式。 現在，餘弦函數是關於0的對稱。 所以，如果我們知道Q2的餘弦值，那我們有兩種可行的解決方案，一個正角與一個負角。 我們將明確選擇正角，這意味我可以寫出這個表達式這裡。 現在，我們有了這個雙連桿機構的逆運動學解決方案。 我們有兩個連接角Q1和Q2的末端執行器姿態表達式x和y，以及一堆常量。 你注意到這兩個方程式不是獨立的。 事實上，Q1的方程式取決於Q2的解。 在這種情況下，Q2是負數，我們將用負數來編寫Q2的解決方案符號在反餘閒前面。 現在，我們需要求解Q1，所以我們將要介紹這個特殊的紅色三角形，我們之前求解的β角，以及用術語定義的γ角度y和x。 現在，我們在Q1、γ和β之間寫出略有不同的關係，不同於我們以前有過。 涉及到符號的變化。 然後，我們可以替代之前的所有等式並得出這個表達式對於Q1。 同樣，這裡的符號發生了變化。 以前，這裡是一個負面信號。 並且，這裡以總結形式是我們的雙連桿逆運動學的解決方案，機器人處於此特定裝置，其中Q2為負。 讓我們比較這兩種解決方案，Q2為政的形況和Q2為正的形況是否定的。</p>
+<p>字幕</p>
+<p><span>我們在上一堂關於正向運動學的講座中看到了這個簡單的雙連桿機器人。</span></p>
+<p><span><span>我們在上一堂關於前進運動學的課程中可以看到這個簡單的雙鏈接機構。</span></span></p>
+<p><span><span>運動學 : 運動學</span></span></p>
+<p><span><span>該機器人的工具提示姿態由兩個數字簡單描述，即相對於世界坐標系的坐標 x 和 y。</span></span></p>
+<p><span><span>該機構的提示框由兩個數字描述，相對於絕對坐標系的坐標x和y。</span></span></p>
+<p><span><span>所以，這裡的問題是給定 x 和 y，我們要確定連接角 q1 和 q2。</span></span></p>
+<p><span><span>所以，這裡的問題是有x和y條件，我們要求解連接角q1和q2的到底有多少。</span></span></p>
+<p><span><span>我們將在本節中遵循的解決方案是幾何解決方案。</span></span></p>
+<p><span><span>我們利用特定幾何來解決這個問題。</span></span></p>
+<p><span><span>我們將從一個簡單的結構開始。</span></span></p>
+<p><span><span>我們從一個簡單的結構開始。</span></span></p>
+<p><span><span>我們將在我們的機器人頂部覆蓋紅色三角形。</span></span></p>
+<p><span><span>我們將在機構上覆蓋紅色弱。</span></span></p>
+<p><span><span>我們知道終點坐標是x，y，所以三角形的垂直高度是y，水平寬度是x。</span></span></p>
+<p><span><span>我們知道最終坐標是x，y，坐標的垂直高度為y，水平寬度為x。</span></span></p>
+<p><span><span>並且，使用畢達哥拉斯定理，我們可以寫出 r 平方等於 x 平方加上 y 平方。</span></span></p>
+<p><span><span>然後，利用畢氏定理，我們可寫出 r² = x ²+ y²。</span></span></p>
+<p><span><span>到目前為止，很容易。</span></span></p>
+<p><span><span>平時很容易。</span></span></p>
+<p><span><span>現在，我們將查看此處以紅色突出顯示的三角形，我們要確定角度 alpha。</span></span></p>
+<p><span><span>現在，我們可以看到凝膠的顏色，並且不能確定α角。</span></span></p>
+<p><span><span>(α=α)</span></span></p>
+<p><span><span>為了做到這一點，我們需要使用餘弦規則。</span></span></p>
+<p><span><span>為達到這一點，我們須使用餘弦定理。</span></span><br/><span><span>（餘弦=餘弦）</span></span></p>
+<p><span><span>而且，如果你對余弦規則有點生疏，這裡有一點複習。</span></span></p>
+<p><span><span>如果你對余弦推理有點生疏，這裡可以幫助你複習一下。</span></span></p>
+<p><span><span>我們有一個任意三角形。</span></span></p>
+<p><span><span>有一個孤獨。</span></span></p>
+<p><span><span>我們沒有任何直角，我們將這條邊的長度標記為 A，而與該邊相對的角度，我們將標記為小 a。</span></span></p>
+<p><span><span>沒有任何的直角，將本片的角度標為小a，而對邊的長度標為A。</span></span></p>
+<p><span><span>並且，我們對這條邊和這個角，以及這條邊和這個角做同樣的事情。</span></span></p>
+<p><span><span>我們再對這個和這個角度，以及這個世界性的事情。</span></span></p>
+<p><span><span>因此，所有邊都標記為大寫字母 A、B 和 C，角標記為小 a、小 b 和小 c。</span></span></p>
+<p><span><span>以這樣推，所有邊都標記為A, B, C，角都標記為a, b, c 。</span></span></p>
+<p><span><span>所以，餘弦規則就是這裡的這種關係。</span></span></p>
+<p><span><span>餘弦定理就是這種關係。</span></span></p>
+<p><span><span>它有點像畢達哥拉斯的定理，除了最後一個額外的術語，其中有 cos a。</span></span></p>
+<p><span><span>有點像畢達哥拉斯數學，不同的是一個孩子。</span></span></p>
+<p><span><span>現在，讓我們將餘弦規則應用於我們剛才看到的特定三角形。</span></span></p>
+<p><span><span>將餘弦定理套用於可能的特定知識。</span></span></p>
+<p><span><span>寫下這種特殊關係非常簡單。</span></span></p>
+<p><span><span>寫下此特殊關係很簡單。</span></span></p>
+<p><span><span>我們可以分離出術語 cos alpha，它為我們提供了我們感興趣的角度 alpha。</span></span></p>
+<p><span><span>我們可以分離出cosα，只需要知道α角度作為條件。</span></span></p>
+<p><span><span>而且，它是根據恆定連桿長度 A1 和 A2 以及末端執行器的位置 x 和 y 定義的。</span></span></p>
+<p><span><span>它是根據特定的路徑長度A1和A2以及最終執行器的位置x和y定義。</span></span></p>
+<p><span><span>我們可以寫出角度 alpha 和 q2 之間的這種簡單關係。</span></span></p>
+<p><span><span>我們可寫出角度α和q2之間的簡單關係。</span></span></p>
+<p><span><span>而且，我們從餘弦函數的形狀知道，q2 的 cos 必須等於 cos alpha 的負數。</span></span></p>
+<p><span><span>並且我們從餘弦函數中知道cos q2必須等於——α。</span></span></p>
+<p><span><span>這一次，讓我們為連接角 q2 的餘弦寫一個表達式。</span></span></p>
+<p><span><span>這次寫出餘弦在連接角q2的表達式。</span></span></p>
+<p><span><span>現在，我們將繪製另一個紅色三角形，並在此處應用一些簡單的三角函數。</span></span></p>
+<p><span><span>我們創造了一個關聯，並應用了三角函數。</span></span></p>
+<p><span><span>如果我們知道 q2，那麼我們就知道這個長度和這個紅色三角形的長度。</span></span></p>
+<p><span><span>如果我們知道q2，就可以知道這個長度和這個變化的長度。</span></span></p>
+<p><span><span>我們可以為連接角 q2 的正弦寫出這種關係。</span></span></p>
+<p><span><span>我們可以在連接角q2寫出正弦關係。</span></span></p>
+<p><span><span>現在，我們可以考慮這個更大的三角形，它的角是β，這個三角形的邊長在這裡用藍色給出。</span></span></p>
+<p><span><span>現在考慮這個大一點的變形，它的角度是β，我們此時的邊長由藍色表示。</span></span></p>
+<p><span><span>(β=β)</span></span></p>
+<p><span><span>並且，三角形另一邊的長度是這個。</span></span></p>
+<p><span><span>且另一邊長度是這個。</span></span></p>
+<p><span><span>所以，現在我們可以在此處根據這些參數編寫角度 beta 的表達式。</span></span></p>
+<p><span><span>我們可以在此根據參數寫出角度β的表達式。</span></span></p>
+<p><span><span>回到我們之前畫的紅色三角形，我們可以建立q1和角度β之間的關係。</span></span></p>
+<p><span><span>回到之前畫的紅色程度，我們可以建立出q1和β的關係。</span></span></p>
+<p><span><span>引入另一個角度，這個伽馬，我們可以寫出角度伽馬和工具提示坐標 x 和 y 之間的關係。</span></span></p>
+<p><span><span>傳入另一個角度ɣ，可寫出角度ɣ和提示框座標x和y之間的關係。</span></span></p>
+<p><span><span>(ɣ=伽馬)</span></span></p>
+<p><span><span>現在，我們可以在我們構建的角度 gamma 和 beta 與我們感興趣的連接角度 q1 之間寫出一個簡單的關係。</span></span></p>
+<p><span><span>現在我們可以構造出角度β和ɣ與連接角度q1之間的關係。</span></span></p>
+<p><span><span>而且，整個關係看起來像這樣。</span></span></p>
+<p><span><span>還有，整個形象像這樣。</span></span></p>
+<p><span><span>相當複雜的關係，它為我們提供了連接的角度，即根據末端執行器坐標 y 和 x 的 q1，以及一系列常量 a1 和 a2，它也是第二個關節角度 q2 的函數。</span></span></p>
+<p><span><span>相當複雜的關係，它提供連接的角度，即最終執行器坐標y和x的q1，以及微妙的a1和a2，它也是第二個角度q2的函數。</span></span></p>
+<p><span><span>所以，讓我們總結一下我們在這裡得出的結論。</span></span></p>
+<p><span><span>所以，總結我們證明事實。</span></span></p>
+<p><span><span>我們有 q2 的餘弦表達式和 q1 的表達式。</span></span></p>
+<p><span><span>我們有q餘弦與q12聲。</span></span></p>
+<p><span><span>現在，餘弦函數關於 0 對稱。</span></span></p>
+<p><span><span>餘弦函數在0點。</span></span></p>
+<p><span><span>因此，如果我們知道 q2 的餘弦值，則有兩種可能的解：正角和負角。</span></span></p>
+<p><span><span>所以我們知道cosq2的值可能為正角和負角。</span></span></p>
+<p><span><span>我們將明確選擇正角。</span><span>這意味著我可以在這裡寫這個表達式。</span></span></p>
+<p><span><span>我們選擇正角，表示我可以寫出此表達式。</span></span></p>
+<p><span><span>現在，我們有了這個雙連桿機器人的逆運動學解決方案。</span></span></p>
+<p><span><span>現在我們能用逆向運動學來解決雙連桿機構。</span></span></p>
+<p><span><span>(逆向運動學=inverse kinematic,IK)</span></span></p>
+<p><span><span>我們有兩個連接角 q1 和 q2 的表達式，根據末端執行器姿勢 x 和 y 以及一系列常量。</span></span></p>
+<p><span><span>我們有兩個連接角 q1 和 q2 的表達式，根據最終執行器的 x 和 y 以及優美的常數。</span></span></p>
+<p><span><span>你注意到這兩個方程不是獨立的。</span></span></p>
+<p><span><span>你要注意到兩不是獨立的。</span></span></p>
+<p><span><span>事實上，q1 的方程取決於 q2 的解。</span></span></p>
+<p><span><span>事實上，q1 誇誇q2的解。</span></span></p>
+<p><span><span>在這種情況下，q2 是負數，我們將用負號在反餘弦前寫出 q2 的解。</span></span></p>
+<p><span><span>在這情況下，q2為負，我們將在q2反餘弦的解前面加上負號。</span></span></p>
+<p><span><span>現在，我們需要求解 q1，因此我們將介紹這個特定的紅色三角形、我們之前求解的角度 beta 以及根據 y 和 x 定義的角度 gamma。</span></span></p>
+<p><span><span>我們的解q1，因此採用特定的形式，然後求解的這個角度β以及y和x定義的角度ɣ。</span></span></p>
+<p><span><span>現在，我們在 q1、gamma 和 beta 之間寫出略有不同的關係，與我們之前的關係不同。</span></span></p>
+<p><span><span>q1、ɣ和β之間的關西，和之前求的不同。</span></span></p>
+<p><span><span>涉及到符號的變化。</span></span></p>
+<p><span><span>涉及到符號的變化。</span></span></p>
+<p><span><span>然後，我們可以替換之前的所有等式，並得出 q1 的這個表達式。</span></span></p>
+<p><span><span>然後可代換之前的所有等式，並求得此q1。</span></span></p>
+<p><span><span>同樣，這裡的符號發生了變化。</span></span></p>
+<p><span><span>，這裡的符號發生了同樣的變化。</span></span></p>
+<p><span><span>以前，這是一個負面信號。</span></span></p>
+<p><span><span>先前，這是個負號。</span></span></p>
+<p><span><span>並且，這裡是我們的雙連桿機器人在這種特定配置下的逆運動學的總結形式的解決方案，其中 q2 為負。</span></span></p>
+<p><span><span>這是雙連桿機構在此逆向運動學的總形式，其中q2為負。</span></span></p>
+<p><span><span>讓我們比較兩個解決方案，q2 為正的情況和 q2 為負的情況。</span></span></p>
+<p><span><span>讓我們比較兩個解決方案，q2為正和q2為負的情況。</span></span></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/eIZuz1XCd0w" title="YouTube video player" width="560"></iframe></p>
