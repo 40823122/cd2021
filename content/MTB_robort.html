@@ -134,8 +134,10 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">w15 << <a href='w15.html'>Previous</a> <a href='字幕整理.html'>Next</a> >> 字幕整理<br /><h1>MTB_robort</h1>
+<p>模擬情況</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/hgh5hvaG48w" title="YouTube video player" width="560"></iframe></p>
-<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function moving(x,y)
+<p>程式碼:</p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function moving(x,y)  --(副程式)計算旋轉軸需要旋轉多少
     a=0.400
     b=0.400
     c=math.pow(math.pow(x,2)+math.pow(y,2),0.5)
@@ -156,11 +158,11 @@ img.add_border {
     
 end
 
-function sysCall_threadmain()
-    joint01=sim.getObjectHandle('joint1')
-    joint02=sim.getObjectHandle('joint2')
-    joint03=sim.getObjectHandle('joint3')
-    jointz=sim.getObjectHandle('jointz')
+function sysCall_threadmain() --主要程式
+    joint01=sim.getObjectHandle('joint1') --定義每根軸的代號
+    joint02=sim.getObjectHandle('joint2') --  ""
+    joint03=sim.getObjectHandle('joint3') -- ""
+    jointz=sim.getObjectHandle('jointz') --  ""
     sim.setJointTargetPosition(joint01,0)
     sim.setJointTargetPosition(joint02,0)
     sim.setJointTargetPosition(joint03,0)
@@ -168,6 +170,7 @@ function sysCall_threadmain()
     sim.setIntegerSignal("pad_switch",1)
     sim.setJointTargetPosition(jointz,-0.056)
     sim.wait(2)
+    sim.wait(10000) --remove this line
     sim.setJointTargetPosition(jointz,0)
      while sim.getSimulationState()~=sim.simulation_advancing_abouttostopre do
         moving(0.2,0.7)
@@ -208,6 +211,8 @@ function sysCall_threadmain()
         sim.wait(2)
     end
 end</pre>
+<p></p>
+<p></p>
 <p></p><br />w15 << <a href='w15.html'>Previous</a> <a href='字幕整理.html'>Next</a> >> 字幕整理</div>
         
     <!-- footer -->
