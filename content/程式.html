@@ -133,15 +133,74 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15<br /><h1>w14</h1>
-<p><span><strong>robodk模擬</strong></span></p>
-<p><span></span>嘗試用romote API啟用並模擬pick and place</p>
-<p>1.至黑窗在自己的倉儲下先<span>pip install robodk</span></p>
-<p>2.將白窗中，參數改成自己的檔案位置與ip位置(檔案位置是Robodk應用程式的檔案位置，IP是從軟體內的選項&gt;其他&gt;API服務器IP，做查詢確認，也一併將允許外部API打勾)</p>
-<p>3.在白窗中按go後，將output顯示的py檔位置複製到<span>軟體內的選項&gt;python&gt;python編輯器中，python解釋器使用python.exe即可)</span></p>
-<p><span>4.在軟體內左方工具列選取模擬件(pick and place)並按右鍵&gt;編輯python程序，沒跳出錯誤訊息及代表可以使用白窗來啟用模擬</span></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/7HxR78vm5ac" title="YouTube video player" width="560"></iframe></p>
-<br />w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
+    <div id="tipue_search_content">籃框移動控制 << <a href='籃框移動控制.html'>Previous</a> <a href='3.html'>Next</a> >> 3<br /><h1>程式</h1>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     joint=sim.getObjectHandle('Revolute_joint')--定義軸跟四條感測器
+     proximity = sim.getObjectHandle("Proximity_sensor")--
+     proximity0 = sim.getObjectHandle("Proximity_sensor0")--
+     proximity1 = sim.getObjectHandle("Proximity_sensor1")--
+     proximity2 = sim.getObjectHandle("Proximity_sensor2")--
+     ball = sim.getObjectHandle("ball")
+     ball2 = sim.getObjectHandle("Sphere")
+     boallDummy = sim.getObjectHandle("Dummy")
+     --sim.sJointTargetVelocity(joint,5.5)
+     axis3=sim.getObjectHandle('slide')
+     distance3 = 0
+     number=-16
+     a = 0
+     --print(auxiliaryData[1])
+     --if (auxiliaryData[1]==string.byte(' ')) then
+     
+
+end
+function sysCall_actuation()
+    --定義四根感測器的名稱
+    local res = sim.readProximitySensor(proximity)
+    local res0 = sim.readProximitySensor(proximity0)
+    local res2 = sim.readProximitySensor(proximity2)
+    local res1 = sim.readProximitySensor(proximity1)
+     --當球經過四條感測器,只要其中一條的值為1對a初始值進行運算
+     if res == 1 or res0 == 1 or res1 == 1 or res2 == 1 then 
+     a = a+1
+     print(a)
+     end
+ message,auxiliaryData=sim.getSimulatorMessage()
+ if (message==sim.message_keypress) then
+      if (auxiliaryData[1]==2007) then
+      sim.setJointTargetVelocity(joint,number)
+      end
+      if (auxiliaryData[1]==32) then
+      sim.setJointTargetVelocity(joint,0)
+      end
+      if (auxiliaryData[1]==2008) then
+      sim.setJointTargetVelocity(joint,1)
+      end
+      if (auxiliaryData[1]==114) then --r
+      local insertedObjects = sim.copyPasteObjects({ball,ball2,ballDummy},0)
+      -- local disturbedCoordinates = {-2,0.02,4}
+      -- local disturbedCoordinates = {1,0,1}
+      local disturbedCoordinates = {4,-2.35,1.5}
+      sim.setObjectPosition(insertedObjects[1],-1,disturbedCoordinates)
+      end
+ end    
+
+
+end
+function sysCall_sensing()
+    -- put your sensing code here
+end
+
+function sysCall_cleanup()
+    -- do some clean-up here
+end
+
+-- See the user manual or the available code snippets for additional callback functions and details
+</pre>
+<p></p>
+<p></p>
+<p><img alt="" height="312" src="./../images/coppeliaSim_KCerYTCqiI_LI.jpg" width="639"/></p>
+<p>四條感應器的擺法</p><br />籃框移動控制 << <a href='籃框移動控制.html'>Previous</a> <a href='3.html'>Next</a> >> 3</div>
         
     <!-- footer -->
       <div class="container">
