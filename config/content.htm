@@ -566,8 +566,7 @@ end</pre>
 <p>根據<a href="https://40823153.github.io/stage1-ag21/content/index.html">stage1-ag21</a>及<a href="https://40823153.github.io/stage2-ag12/content/index.html">stage2-ag12</a>的基礎下</p>
 <p>增加感應器來對進球進行計分</p>
 <p><span>再加上籃框左右移動，fanuc_m710ic_50手臂投球，與最後才加的Mtb_robot取放球。</span></p>
-<p><br/><br/><br/><br/>4</p>
-<h3>籃框移動控制</h3>
+<p><br/><br/><a href='/get_page/w17/&lt;iframe width="560" height="315" src="https:/www.youtube.com/embed/kXlI6jppKTk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;'>檔案連結</a><br/><br/><br/></p><h3>籃框移動控制</h3>
 <pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
     -- do some initialization here
      j=sim.getObjectHandle('slide') --定義籃框伸縮軸
@@ -606,7 +605,8 @@ end
   
 -- See the user manual or the available code snippets for additional callback functions and details</pre>
 <p></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5XdYw_vWd8A" title="YouTube video player" width="560"></iframe></p><h3>程式</h3>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5XdYw_vWd8A" title="YouTube video player" width="560"></iframe></p>
+<h3>程式</h3>
 <pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
     -- do some initialization here
      joint=sim.getObjectHandle('Revolute_joint')--定義軸跟四條感測器
@@ -624,8 +624,8 @@ end
      a = 0
      --print(auxiliaryData[1])
      --if (auxiliaryData[1]==string.byte(' ')) then
-     
-
+      
+ 
 end
 function sysCall_actuation()
     --定義四根感測器的名稱
@@ -634,44 +634,102 @@ function sysCall_actuation()
     local res2 = sim.readProximitySensor(proximity2)
     local res1 = sim.readProximitySensor(proximity1)
      --當球經過四條感測器,只要其中一條的值為1對a初始值進行運算
-     if res == 1 or res0 == 1 or res1 == 1 or res2 == 1 then 
+     if res == 1 or res0 == 1 or res1 == 1 or res2 == 1 then
      a = a+1
-     print(a)
+     print(a)--同時顯示出a現在的值
      end
  message,auxiliaryData=sim.getSimulatorMessage()
  if (message==sim.message_keypress) then
-      if (auxiliaryData[1]==2007) then
+      if (auxiliaryData[1]==2007) then--按下方向鍵上,擊球桿的主動軸順時針旋轉
       sim.setJointTargetVelocity(joint,number)
       end
-      if (auxiliaryData[1]==32) then
+      if (auxiliaryData[1]==32) then--按下空白建,擊球桿的主動軸速度為0
       sim.setJointTargetVelocity(joint,0)
       end
-      if (auxiliaryData[1]==2008) then
+      if (auxiliaryData[1]==2008) then--按下方向鍵下,擊球桿的主動軸逆時針旋轉且速度為1
       sim.setJointTargetVelocity(joint,1)
       end
-      if (auxiliaryData[1]==114) then --r
+      if (auxiliaryData[1]==114) then --r/重新添加球
       local insertedObjects = sim.copyPasteObjects({ball,ball2,ballDummy},0)
       -- local disturbedCoordinates = {-2,0.02,4}
       -- local disturbedCoordinates = {1,0,1}
       local disturbedCoordinates = {4,-2.35,1.5}
       sim.setObjectPosition(insertedObjects[1],-1,disturbedCoordinates)
       end
- end    
-
-
+ end   
+ 
+ 
 end
 function sysCall_sensing()
     -- put your sensing code here
 end
-
+ 
 function sysCall_cleanup()
     -- do some clean-up here
 end
+ 
+-- See the user manual or the available code snippets for additional callback functions and details</pre>
+<p><br/><br/></p>
+<p><span>四條感應器的擺法</span></p>
+<p><img alt="" height="312" src="/images/coppeliaSim_KCerYTCqiI_LI.jpg" width="639"/></p>
+<h3>導入w16的機械手臂</h3>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     axis1=sim.getObjectHandle('MTB_axis1')
+     axis2=sim.getObjectHandle('MTB_axis2')
+     suctionPad=sim.getObjectHandle('suctionPad')     
+     rotation1 = 0
+     rotation2 = 0
+     
+     deg = math.pi/180
+     
+end
+function sysCall_actuation()
+ calibration = 0.05
+ message,auxiliaryData=sim.getSimulatorMessage()
+ if (message==sim.message_keypress) then
+      --print(auxiliaryData[1])--key
+      --if (auxiliaryData[1]==string.byte(' ')) then
+      --end
+      if (auxiliaryData[1]==119) then--w
+      rotation2 = rotation2 + 1*deg
+      sim.setJointPosition(axis2, rotation2)
+      end
+      -- Press the "w" key to turn axis2 5 degrees counterclockwise
+      if (auxiliaryData[1]==115) then --s
+      rotation2 = rotation2 - 1*deg
+      sim.setJointPosition(axis2, rotation2)
+      end
+      -- Press the "s" key to turn axis2 5 degrees clockwise
+      -- Press the "q" key to move up 0.01
+      if (auxiliaryData[1]==122) then --z 
+sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','true')
+      end -- Press "z" key to activate the suction pad
+      if (auxiliaryData[1]==120) then --x
+sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','false')
+      end -- Press "x" key to deactivate the suction pad
+      if (auxiliaryData[1]==49) then --1
+      V1=61.2012*deg
+      V2=49.5059*deg
+      sim.setJointPosition(axis1, V1)
+      sim.setJointPosition(axis2, V2)
+      end
+      if (auxiliaryData[1]==50) then --2
+      sim.setJointPosition(axis1, 0)
+      sim.setJointPosition(axis2, 0)
+      end
+      --if (auxiliaryData[1]==51) then --3
+      --V1=-158.2529*deg
+      --V2=87.7894*deg
+      --sim.setJointPosition(axis1, V1)
+      --sim.setJointPosition(axis2, V2)
+      --end
+      
+ end    
 
--- See the user manual or the available code snippets for additional callback functions and details
+end
+
 </pre>
 <p></p>
 <p></p>
-<p><img alt="" height="312" src="/images/coppeliaSim_KCerYTCqiI_LI.jpg" width="639"/></p>
-<p>四條感應器的擺法</p><h3>3</h3>
-<h2>w18</h2>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kXlI6jppKTk" title="YouTube video player" width="560"></iframe></p><h2>w18</h2>
